@@ -1,48 +1,54 @@
-# Unity方差阴影映射(VSM)实现
+# Unity Variance Shadow Maps (VSM) Implementation
 
-Unity中的方差阴影映射(Variance Shadow Maps, VSM)技术实现，提供平滑的阴影边缘效果。
+[中文版本](README_CN.md) | **English Version**
 
-## 核心原理
+Unity implementation of Variance Shadow Maps (VSM) technology, providing smooth shadow edge effects.
 
-VSM通过存储深度值及其平方值，使用Chebyshev不等式计算阴影概率，实现柔和的阴影边缘。
+## Core Principles
 
-**主要特点：**
-- RG浮点纹理存储深度和深度平方
-- Chebyshev不等式计算阴影概率
-- 光线渗漏减少参数
+VSM stores depth values and their squared values, using Chebyshev's inequality to calculate shadow probability, achieving soft shadow edges.
 
-## 项目文件
+**Key Features:**
+
+- RG floating-point texture stores depth and depth squared
+- Chebyshev's inequality for shadow probability calculation
+- Light bleeding reduction parameters
+
+## Project Files
 
 ```
 Assets/
 ├── Shaders/
-│   ├── VSMShadowMap.shader    # 生成阴影贴图
-│   └── VSMLighting.shader     # VSM阴影渲染
+│   ├── VSMShadowMap.shader    # Generate shadow maps
+│   └── VSMLighting.shader     # VSM shadow rendering
 └── Scripts/
-    ├── VSMShadowManager.cs    # VSM管理器
-    ├── VSMDebugger.cs         # 调试工具
-    └── VSMDemoController.cs   # 演示控制器
+    ├── VSMShadowManager.cs    # VSM manager
+    ├── VSMDebugger.cs         # Debug tools
+    └── VSMDemoController.cs   # Demo controller
 ```
 
-## 快速开始
+## Quick Start
 
-1. **场景设置**
-   - 添加平面作为地面
-   - 放置物体作为阴影投射物
-   - 创建平行光源
+1. **Scene Setup**
+   
+   - Add a plane as ground
+   - Place objects as shadow casters
+   - Create directional light source
 
-2. **VSM配置**
-   - 创建空物体，添加`VSMShadowManager`组件
-   - 运行`VSMDemoController.CreateVSMTestScene()`自动创建测试场景
+2. **VSM Configuration**
+   
+   - Create empty GameObject, add `VSMShadowManager` component
+   - Run `VSMDemoController.CreateVSMTestScene()` to automatically create test scene
 
-3. **参数调整**
-   - **Shadow Strength**: 阴影强度 (0-1)
-   - **Min Variance**: 边缘柔和度 (0.00001-0.01)
-   - **Light Bleeding Reduction**: 光线渗漏减少 (0-1)
-   - **Depth Bias**: 深度偏移 (0-0.1)
+3. **Parameter Adjustment**
+   
+   - **Shadow Strength**: Shadow intensity (0-1)
+   - **Min Variance**: Edge softness (0.00001-0.01)
+   - **Light Bleeding Reduction**: Light bleeding reduction (0-1)
+   - **Depth Bias**: Depth offset (0-0.1)
 
-## 性能优化
+## Performance Optimization
 
-- 降低阴影贴图分辨率
-- 调整阴影相机范围
-- 合理设置参数值
+- Reduce shadow map resolution
+- Adjust shadow camera range
+- Set reasonable parameter values
